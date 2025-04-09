@@ -1,52 +1,52 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ポーカーチャレンジ</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Poker Challenge</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
   <div class="container">
-    <h1>ポーカーチャレンジ</h1>
+    <h1>Poker Challenge</h1>
 
-    <!-- コイン・難易度エリア -->
+    <!-- Coins and CPU difficulty -->
     <div class="status">
-      <div>コイン: <span id="coinCount">100</span></div>
+      <div>Coins: <span id="coinCount">100</span></div>
       <div>
-        CPU難易度: 
-        <input type="range" id="cpuDifficulty" min="1" max="10" value="5">
+        CPU Difficulty:
+        <input type="range" id="cpuDifficulty" min="1" max="10" value="5" />
         <span id="difficultyValue">5</span>
       </div>
     </div>
 
-    <!-- ラウンド開始ボタン -->
+    <!-- New round button -->
     <div class="controls">
-      <button id="dealButton">新しいラウンド</button>
+      <button id="dealButton">New Round</button>
     </div>
 
-    <!-- プレイヤーの手札エリア -->
+    <!-- Player's hand area -->
     <div class="handArea">
-      <h2>あなたの手札</h2>
+      <h2>Your Hand</h2>
       <div id="playerHand" class="hand"></div>
       <div id="playerHandEvaluation" class="hand-evaluation">Your Hand: ?</div>
     </div>
 
-    <!-- CPUの手札エリア（初回は非表示） -->
+    <!-- CPU's hand area (hidden initially) -->
     <div class="handArea" id="cpuArea" style="display:none;">
-      <h2>CPUの手札</h2>
+      <h2>CPU Hand</h2>
       <div id="cpuHand" class="hand"></div>
       <div id="cpuHandEvaluation" class="hand-evaluation">CPU Hand: ?</div>
-      <div class="cpu-action">CPUの選択: <span id="cpuDecision">?</span></div>
+      <div class="cpu-action">CPU Action: <span id="cpuDecision">?</span></div>
     </div>
 
-    <!-- プレイヤーのアクション -->
+    <!-- Player action buttons -->
     <div class="controls">
       <button id="raiseButton" disabled>Raise</button>
       <button id="callButton" disabled>Call</button>
     </div>
 
-    <!-- 結果メッセージ -->
+    <!-- Result message -->
     <div id="message" class="message"></div>
   </div>
   

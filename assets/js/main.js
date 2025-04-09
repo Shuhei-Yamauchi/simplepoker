@@ -1,4 +1,4 @@
-// ゲーム全体の状態管理
+// Global game state variables
 let coins = 100;
 let currentDeck = [];
 let playerHand = [];
@@ -21,32 +21,32 @@ const cpuDecisionEl = document.getElementById('cpuDecision');
 const cpuAreaDiv = document.getElementById('cpuArea');
 const messageEl = document.getElementById('message');
 
-// CPU難易度の表示更新
+// Update CPU difficulty display
 cpuDifficultyEl.addEventListener('input', () => {
   difficultyValueEl.textContent = cpuDifficultyEl.value;
 });
 
-// イベント登録
+// Event listeners
 dealButton.addEventListener('click', startRound);
 raiseButton.addEventListener('click', () => { finishRound('raise'); });
 callButton.addEventListener('click', () => { finishRound('call'); });
 
-// カード情報（スートとランク）
-// スートは記号、ランクは数値（11=J, 12=Q, 13=K, 14=A）
+// Card information (suit and rank)
+// Suits are symbols, and ranks are numbers (11 = J, 12 = Q, 13 = K, 14 = A)
 const suits = ['♠', '♥', '♦', '♣'];
-const ranks = [2,3,4,5,6,7,8,9,10,11,12,13,14];
+const ranks = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 
-// 表示用：カード情報を文字列変換（ランク変換含む）
+// Convert a card object to a display-friendly format (e.g., "A♠")
 function cardToString(card) {
   let rankStr = card.rank;
-  if(card.rank === 11) rankStr = 'J';
-  else if(card.rank === 12) rankStr = 'Q';
-  else if(card.rank === 13) rankStr = 'K';
-  else if(card.rank === 14) rankStr = 'A';
+  if (card.rank === 11) rankStr = 'J';
+  else if (card.rank === 12) rankStr = 'Q';
+  else if (card.rank === 13) rankStr = 'K';
+  else if (card.rank === 14) rankStr = 'A';
   return { rank: rankStr, suit: card.suit };
 }
 
-// 52枚のデッキを生成
+// Create a 52-card deck
 function createDeck() {
   let deck = [];
   for (let suit of suits) {
@@ -57,7 +57,7 @@ function createDeck() {
   return deck;
 }
 
-// フィッシャー–イェーツのシャッフル
+// Shuffle the deck using the Fisher–Yates algorithm
 function shuffle(deck) {
   for (let i = deck.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -65,13 +65,14 @@ function shuffle(deck) {
   }
 }
 
-// 指定枚数のカードを配る
+// Deal a specified number of cards from the deck
 function dealHand(deck, count) {
   return deck.splice(0, count);
 }
 
-// 5カードポーカーハンドの評価（シンプルな実装）
-// 戻り値は { rank, name, tieBreakers } 形式
+// Evaluate a 5-card poker hand.
+// Returns an object: { rank, name, tieBreakers }
+// where rank is a numerical strength (1–10) and name is a text description.
 function evaluateHand(hand) {
   let counts = {};
   let suitsCount = {};
@@ -91,11 +92,11 @@ function evaluateHand(hand) {
     if (uniqueRanks[4] - uniqueRanks[0] === 4) {
       isStraight = true;
     } else {
-      // A,2,3,4,5 の特殊ケース
+      // Special case: A,2,3,4,5
       if (uniqueRanks.includes(14) && uniqueRanks[0] === 2 && uniqueRanks[1] === 3 &&
           uniqueRanks[2] === 4 && uniqueRanks[3] === 5) {
         isStraight = true;
-        ranksArr = [5,4,3,2,1];
+        ranksArr = [5, 4, 3, 2, 1];
       }
     }
   }
@@ -151,7 +152,8 @@ function evaluateHand(hand) {
   return { rank: handRank, name: handName, tieBreakers: tieBreakers };
 }
 
-// 手札同士の比較（正の値ならプレイヤー勝ち、負ならCPU勝ち、0は引き分け）
+// Compare two evaluated hands.
+// Returns a positive value if handA wins, negative if handB wins, or 0 for a tie.
 function compareHands(handA, handB) {
   if (handA.rank !== handB.rank) return handA.rank - handB.rank;
   for (let i = 0; i < handA.tieBreakers.length; i++) {
@@ -161,8 +163,8 @@ function compareHands(handA, handB) {
   return 0;
 }
 
-// CPUのアクション選択（手札評価とCPU難易度に基づく）
-// 例：難易度が高いほど幅広い役で raise する
+// CPU action selection based on hand evaluation and CPU difficulty.
+// For example, with higher difficulty the CPU may raise with a wider range of hands.
 function cpuSelectAction(evaluation, difficulty) {
   let threshold = 4 + (11 - difficulty) / 2;
   if (evaluation.rank >= threshold) {
@@ -172,13 +174,13 @@ function cpuSelectAction(evaluation, difficulty) {
   }
 }
 
-// ボタンの有効／無効制御
+// Disable action buttons.
 function resetButtons() {
   raiseButton.disabled = true;
   callButton.disabled = true;
 }
 
-// 手札（カード群）を表示する関数
+// Display a hand (array of cards) in the specified container.
 function displayHand(hand, container) {
   container.innerHTML = '';
   hand.forEach(card => {
@@ -194,7 +196,7 @@ function displayHand(hand, container) {
     suitElem.textContent = cardInfo.suit;
     suitElem.classList.add('suit');
     
-    // ハート・ダイヤの場合は赤色
+    // Red for hearts and diamonds.
     if (card.suit === '♥' || card.suit === '♦') {
       rankElem.classList.add('red');
       suitElem.classList.add('red');
@@ -206,7 +208,7 @@ function displayHand(hand, container) {
   });
 }
 
-// 新しいラウンド開始
+// Start a new round.
 function startRound() {
   messageEl.textContent = '';
   cpuAreaDiv.style.display = 'none';
@@ -227,10 +229,10 @@ function startRound() {
 
   raiseButton.disabled = false;
   callButton.disabled = false;
-  messageEl.textContent = 'あなたは Raise か Call を選んでください。';
+  messageEl.textContent = 'Choose to RAISE or CALL.';
 }
 
-// プレイヤーがアクションを選択したときの処理
+// Process the round outcome after the player chooses an action.
 function finishRound(playerAction) {
   resetButtons();
   
@@ -239,7 +241,7 @@ function finishRound(playerAction) {
   cpuHandEvaluationEl.textContent = "CPU Hand: " + cpuHandEvaluation.name;
   cpuDecisionEl.textContent = currentCpuAction.toUpperCase();
 
-  // 両者のアクションで決まるポット（例）
+  // Determine pot size based on both actions.
   let pot = 0;
   if (playerAction === 'call' && currentCpuAction === 'call') {
     pot = 20;
@@ -252,14 +254,15 @@ function finishRound(playerAction) {
   const result = compareHands(playerHandEvaluation, cpuHandEvaluation);
   let outcome = '';
   if (result > 0) {
-    outcome = 'あなたの勝ちです！';
+    outcome = 'You win!';
     coins += pot;
   } else if (result < 0) {
-    outcome = 'CPUの勝ちです…';
+    outcome = 'CPU wins...';
     coins -= pot;
   } else {
-    outcome = '引き分けです。';
+    outcome = 'It’s a tie.';
   }
   coinCountEl.textContent = coins;
-  messageEl.textContent = `あなたは ${playerAction.toUpperCase()}、CPUは ${currentCpuAction.toUpperCase()}。\nショーダウンの結果 → ${outcome} (ポット: ${pot} コイン)`;
+  messageEl.textContent = `You chose ${playerAction.toUpperCase()}, CPU chose ${currentCpuAction.toUpperCase()}.
+Showdown Result → ${outcome} (Pot: ${pot} coins)`;
 }
