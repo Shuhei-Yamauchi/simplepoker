@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>シンプルカードゲーム</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>シンプルカードゲーム</h1>
+
+    <!-- コイン数とCPU難易度 -->
+    <div class="status">
+      <div>コイン: <span id="coinCount">100</span></div>
+      <div>
+        CPU難易度: 
+        <input type="range" id="cpuDifficulty" min="1" max="10" value="5">
+        <span id="difficultyValue">5</span>
+      </div>
+    </div>
+
+    <!-- ラウンド開始ボタン -->
+    <div class="controls">
+      <button id="dealButton">新しいラウンド</button>
+    </div>
+
+    <!-- ゲームエリア（ラウンド中のみ表示） -->
+    <div id="gameArea" style="display:none;">
+      <div class="card">あなたのカード: <span id="playerCard">?</span></div>
+      <div class="card">相手のカード: <span id="cpuCard">?</span></div>
+      <div class="expression" id="cpuExpression">😐</div>
+      <div class="controls">
+        <button id="raiseButton">Raise</button>
+        <button id="callButton">Call</button>
+      </div>
+    </div>
+
+    <div id="message" class="message"></div>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

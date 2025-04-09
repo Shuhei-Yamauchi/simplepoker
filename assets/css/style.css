@@ -1,0 +1,81 @@
+/* 全体の基本レイアウトとレスポンシブデザイン */
+
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .container {
+    max-width: 600px;
+    width: 100%;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* ステータス部分 */
+  .status {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  /* コントロールボタンとスライダー */
+  .controls {
+    text-align: center;
+  }
+  .controls button,
+  .controls input[type="range"] {
+    font-size: 1.2em;
+    padding: 10px;
+    margin: 10px;
+  }
+  
+  /* カードや表情の表示 */
+  .card {
+    font-size: 2em;
+    text-align: center;
+    margin: 20px 0;
+  }
+  .expression {
+    font-size: 3em;
+    text-align: center;
+    margin: 10px;
+  }
+  
+  /* メッセージ表示 */
+  .message {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* モバイル向けのレスポンシブ調整 */
+  @media (max-width: 600px) {
+    .container {
+      padding: 15px;
+    }
+    .controls button,
+    .controls input[type="range"] {
+      font-size: 1em;
+      padding: 8px;
+    }
+    .card {
+      font-size: 1.5em;
+    }
+    .expression {
+      font-size: 2.5em;
+    }
+  }
+  
