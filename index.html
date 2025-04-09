@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>シンプルカードゲーム</title>
+  <title>ポーカーチャレンジ</title>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
   <div class="container">
-    <h1>シンプルカードゲーム</h1>
+    <h1>ポーカーチャレンジ</h1>
 
     <!-- コイン数とCPU難易度 -->
     <div class="status">
@@ -20,22 +20,32 @@
       </div>
     </div>
 
-    <!-- ラウンド開始ボタン -->
+    <!-- ラウンド開始 -->
     <div class="controls">
       <button id="dealButton">新しいラウンド</button>
     </div>
 
-    <!-- ゲームエリア（ラウンド中のみ表示） -->
-    <div id="gameArea" style="display:none;">
-      <div class="card">あなたのカード: <span id="playerCard">?</span></div>
-      <div class="card">相手のカード: <span id="cpuCard">?</span></div>
-      <div class="expression" id="cpuExpression">😐</div>
-      <div class="controls">
-        <button id="raiseButton">Raise</button>
-        <button id="callButton">Call</button>
-      </div>
+    <!-- プレイヤーの手札表示 -->
+    <div class="handArea">
+      <h2>あなたの手札</h2>
+      <div id="playerHand" class="hand"></div>
+      <div>あなたの役: <span id="playerHandName">?</span></div>
     </div>
 
+    <!-- CPUの手札（初めは非表示） -->
+    <div class="handArea" id="cpuArea" style="display:none;">
+      <h2>CPUの手札</h2>
+      <div id="cpuHand" class="hand"></div>
+      <div>CPUの役: <span id="cpuHandName">?</span> (<span id="cpuDecision">?</span>)</div>
+    </div>
+
+    <!-- プレイヤーのアクション選択 -->
+    <div class="controls">
+      <button id="raiseButton" disabled>Raise</button>
+      <button id="callButton" disabled>Call</button>
+    </div>
+
+    <!-- 結果表示 -->
     <div id="message" class="message"></div>
   </div>
 

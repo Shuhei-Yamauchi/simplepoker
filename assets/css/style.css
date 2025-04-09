@@ -1,5 +1,4 @@
-/* 全体の基本レイアウトとレスポンシブデザイン */
-
+/* 全体レイアウトと基本スタイル */
 body {
     margin: 0;
     font-family: sans-serif;
@@ -25,16 +24,16 @@ body {
     margin-bottom: 20px;
   }
   
-  /* ステータス部分 */
   .status {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
   }
   
-  /* コントロールボタンとスライダー */
+  /* ボタンとコントロール */
   .controls {
     text-align: center;
+    margin-bottom: 20px;
   }
   .controls button,
   .controls input[type="range"] {
@@ -43,25 +42,29 @@ body {
     margin: 10px;
   }
   
-  /* カードや表情の表示 */
-  .card {
-    font-size: 2em;
-    text-align: center;
-    margin: 20px 0;
+  /* 手札エリア */
+  .handArea {
+    margin-bottom: 20px;
   }
-  .expression {
-    font-size: 3em;
+  .handArea h2 {
     text-align: center;
-    margin: 10px;
+    margin-bottom: 5px;
+  }
+  .hand {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    font-size: 1.8em;
+    margin-bottom: 10px;
   }
   
-  /* メッセージ表示 */
+  /* メッセージ */
   .message {
     text-align: center;
     margin-top: 20px;
   }
   
-  /* モバイル向けのレスポンシブ調整 */
+  /* レスポンシブ調整 */
   @media (max-width: 600px) {
     .container {
       padding: 15px;
@@ -71,11 +74,8 @@ body {
       font-size: 1em;
       padding: 8px;
     }
-    .card {
+    .hand {
       font-size: 1.5em;
-    }
-    .expression {
-      font-size: 2.5em;
     }
   }
   
