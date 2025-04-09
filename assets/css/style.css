@@ -1,4 +1,4 @@
-/* 全体レイアウトと基本スタイル */
+/* 全体のレイアウト */
 body {
     margin: 0;
     font-family: sans-serif;
@@ -10,7 +10,7 @@ body {
   }
   
   .container {
-    max-width: 600px;
+    max-width: 800px;
     width: 100%;
     background: #fff;
     border-radius: 8px;
@@ -30,7 +30,7 @@ body {
     margin-bottom: 20px;
   }
   
-  /* ボタンとコントロール */
+  /* コントロール系 */
   .controls {
     text-align: center;
     margin-bottom: 20px;
@@ -54,17 +54,57 @@ body {
     display: flex;
     justify-content: center;
     gap: 10px;
-    font-size: 1.8em;
-    margin-bottom: 10px;
+    flex-wrap: wrap;
   }
   
-  /* メッセージ */
+  /* カード（各カードをブロック表示） */
+  .card-item {
+    width: 60px;
+    height: 90px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px;
+    text-align: center;
+    font-size: 1.2em;
+  }
+  
+  .card-item .rank {
+    font-weight: bold;
+  }
+  
+  .card-item .suit {
+    font-size: 1.5em;
+  }
+  
+  /* ハート・ダイヤの場合は赤色に */
+  .red {
+    color: red;
+  }
+  
+  /* 役（ハンド評価）の表示 */
+  .hand-evaluation {
+    text-align: center;
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-top: 10px;
+    padding: 5px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+  }
+  
+  /* 結果メッセージ */
   .message {
     text-align: center;
     margin-top: 20px;
+    font-size: 1.2em;
   }
   
-  /* レスポンシブ調整 */
+  /* レスポンシブ対応 */
   @media (max-width: 600px) {
     .container {
       padding: 15px;
@@ -74,8 +114,13 @@ body {
       font-size: 1em;
       padding: 8px;
     }
-    .hand {
-      font-size: 1.5em;
+    .card-item {
+      width: 50px;
+      height: 75px;
+      font-size: 1em;
+    }
+    .hand-evaluation {
+      font-size: 1.2em;
     }
   }
   

@@ -10,7 +10,7 @@
   <div class="container">
     <h1>ポーカーチャレンジ</h1>
 
-    <!-- コイン数とCPU難易度 -->
+    <!-- コイン・難易度エリア -->
     <div class="status">
       <div>コイン: <span id="coinCount">100</span></div>
       <div>
@@ -20,35 +20,36 @@
       </div>
     </div>
 
-    <!-- ラウンド開始 -->
+    <!-- ラウンド開始ボタン -->
     <div class="controls">
       <button id="dealButton">新しいラウンド</button>
     </div>
 
-    <!-- プレイヤーの手札表示 -->
+    <!-- プレイヤーの手札エリア -->
     <div class="handArea">
       <h2>あなたの手札</h2>
       <div id="playerHand" class="hand"></div>
-      <div>あなたの役: <span id="playerHandName">?</span></div>
+      <div id="playerHandEvaluation" class="hand-evaluation">Your Hand: ?</div>
     </div>
 
-    <!-- CPUの手札（初めは非表示） -->
+    <!-- CPUの手札エリア（初回は非表示） -->
     <div class="handArea" id="cpuArea" style="display:none;">
       <h2>CPUの手札</h2>
       <div id="cpuHand" class="hand"></div>
-      <div>CPUの役: <span id="cpuHandName">?</span> (<span id="cpuDecision">?</span>)</div>
+      <div id="cpuHandEvaluation" class="hand-evaluation">CPU Hand: ?</div>
+      <div class="cpu-action">CPUの選択: <span id="cpuDecision">?</span></div>
     </div>
 
-    <!-- プレイヤーのアクション選択 -->
+    <!-- プレイヤーのアクション -->
     <div class="controls">
       <button id="raiseButton" disabled>Raise</button>
       <button id="callButton" disabled>Call</button>
     </div>
 
-    <!-- 結果表示 -->
+    <!-- 結果メッセージ -->
     <div id="message" class="message"></div>
   </div>
-
+  
   <script src="assets/js/main.js"></script>
 </body>
 </html>
